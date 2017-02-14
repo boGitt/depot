@@ -158,3 +158,11 @@
 #stroe .entry form div {
     display : inline
 }
+
+/************ productList page productCount ******************/
+
+#productCount {
+    float : right;
+    margin-right : 10px;
+    margin-top : -40px;
+}
