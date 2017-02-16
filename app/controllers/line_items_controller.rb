@@ -19,6 +19,7 @@ class LineItemsController < ApplicationController
 
   # GET /line_items/1/edit
   def edit
+
   end
 
 
@@ -45,6 +46,14 @@ class LineItemsController < ApplicationController
   # PATCH/PUT /line_items/1.json
   def update
     respond_to do |format|
+      if @line_item.minus_one_product(@line_item.id)
+        format.html { redirect_to @line_item.cart, notice: 'product was successfully minus.' }
+        format.json { render :show, status: :ok, location: @line_item }
+      else
+        format.html { render :edit }
+        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+      end
+=begin
       if @line_item.update(line_item_params)
         format.html { redirect_to @line_item, notice: 'Line item was successfully updated.' }
         format.json { render :show, status: :ok, location: @line_item }
@@ -52,6 +61,7 @@ class LineItemsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
+=end
     end
   end
 
